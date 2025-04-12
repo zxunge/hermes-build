@@ -18,6 +18,7 @@ jobs:
           mingw-w64-i686-toolchain
           mingw-w64-i686-cmake
           mingw-w64-i686-python
+          mingw-w64-i686-python-pip
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
           mingw-w64-i686-ninja
