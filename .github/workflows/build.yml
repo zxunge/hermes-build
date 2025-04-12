@@ -35,7 +35,7 @@ jobs:
       shell: msys2 {0}
       run: |
         wget -q https://github.com/zxunge/mingw-package-archives/blob/main/mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
-        pacman -U --no-confirm mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
+        pacman -U --noconfirm mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
         
         # Create Python virtualenv
         virtualenv -p python3 hermes_venv
