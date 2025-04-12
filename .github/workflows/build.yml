@@ -24,12 +24,6 @@ jobs:
           mingw-w64-i686-python-virtualenv
           mingw-w64-i686-ninja
 
-    - name: Checkout Hermes
-      uses: actions/checkout@v4
-      with:
-        repository: facebook/hermes
-        path: hermes_venv/hermes
-
     - name: Build Hermes
       shell: msys2 {0}
       run: |
@@ -39,7 +33,8 @@ jobs:
         cd hermes_venv
         pip install pygments
         pip install yaml-1.3
-        
+
+        git clone https://github.com/facebook/hermes.git
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
 
@@ -49,4 +44,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Hermes
-        path: build
+        path: hermes_venv/hermes/build
