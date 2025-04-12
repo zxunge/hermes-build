@@ -31,6 +31,9 @@ jobs:
     - name: Build Hermes
       shell: msys2 {0}
       run: |
+        pip install pygments
+        pip install yaml
+        
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
 
