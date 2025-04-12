@@ -23,6 +23,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: facebook/hermes
+        path: hermes
 
     - name: Build Hermes
       shell: msys2 {0}
