@@ -33,7 +33,7 @@ jobs:
       shell: msys2 {0}
       run: |
         pip install pygments
-        pip install yaml
+        pip install yaml-1.3
         
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
