@@ -21,6 +21,7 @@ jobs:
           mingw-w64-i686-python-pip
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
+          mingw-w64-i686-icu
           mingw-w64-i686-python-virtualenv
           mingw-w64-i686-ninja
 
