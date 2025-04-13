@@ -16,7 +16,7 @@ jobs:
         update: true
         install: >-
           mingw-w64-i686-toolchain
-          mingw-w64-i686-cmake
+          mingw-w64-i686-cmake=3.27
           mingw-w64-i686-python
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
