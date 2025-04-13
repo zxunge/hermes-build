@@ -52,7 +52,7 @@ jobs:
         git apply ../0001-Fix-llvh-build-with-problematic-includes.patch 
         popd
 
-        cmake -S hermes -B build -G Ninja
+        cmake -S hermes -B build -G Ninja /D_WINDOWS
         cmake --build ./build
 
     - name: Upload artifact
