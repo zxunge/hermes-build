@@ -40,7 +40,7 @@ jobs:
         
         wget -q https://github.com/zxunge/mingw-package-archives/raw/refs/heads/main/mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
         pacman -U --noconfirm mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
-        pacman -S --noconfirm mingw-w64-i686-cmake=3.27
+        pacman -S --noconfirm mingw-w64-i686-cmake=3.27.0-1
         
         ## Create Python virtualenv
         #virtualenv -p python3 hermes_venv
