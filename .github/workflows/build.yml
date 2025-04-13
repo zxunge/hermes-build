@@ -15,6 +15,7 @@ jobs:
         msystem: mingw32
         update: true
         install: >-
+          git
           mingw-w64-i686-toolchain
           mingw-w64-i686-python
           mingw-w64-i686-python-pygments
