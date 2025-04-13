@@ -49,10 +49,11 @@ jobs:
 
         # Patch build
         pushd hermes/ 
-        git apply ../0001-Fix-llvh-build-with-problematic-includes.patch 
+        git apply ../0001-Fix-llvh-build-with-problematic-includes.patch
+        git apply ../0001-Fix-win32-macro.patch
         popd
 
-        cmake -S hermes -B build -G Ninja /D_WINDOWS
+        cmake -S hermes -B build -G Ninja
         cmake --build ./build
 
     - name: Upload artifact
