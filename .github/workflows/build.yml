@@ -15,7 +15,8 @@ jobs:
         msystem: mingw32
         update: true
         install: >-
-          mingw-w64-i686-toolchain
+          mingw-w64-i686-clang
+          mingw-w64-i686-llvm
           mingw-w64-i686-python
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
@@ -42,18 +43,9 @@ jobs:
         wget -q https://repo.msys2.org/mingw/mingw32/mingw-w64-i686-cmake-3.31.6-1-any.pkg.tar.zst
         pacman -U --noconfirm mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
         pacman -U --noconfirm mingw-w64-i686-cmake-3.31.6-1-any.pkg.tar.zst
-        
-        ## Create Python virtualenv
-        #virtualenv -p python3 hermes_venv
-        #source hermes_venv/bin/activate
-        #cd hermes_venv
-        #pip install pygments
-        #pip install pyyaml
 
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
-
-        #deactivate
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
