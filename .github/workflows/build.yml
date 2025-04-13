@@ -22,6 +22,8 @@ jobs:
           mingw-w64-i686-python-yaml
           mingw-w64-i686-icu
           mingw-w64-i686-ninja
+          mingw-w64-i686-readline
+          mingw-w64-i686-dlfcn
 #         mingw-w64-i686-python-virtualenv
 #         mingw-w64-i686-python-pip
 
