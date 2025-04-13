@@ -18,39 +18,42 @@ jobs:
           mingw-w64-i686-toolchain
           mingw-w64-i686-cmake
           mingw-w64-i686-python
-          mingw-w64-i686-python-pip
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
           mingw-w64-i686-icu
-          mingw-w64-i686-python-virtualenv
           mingw-w64-i686-ninja
+          # mingw-w64-i686-python-virtualenv
+          # mingw-w64-i686-python-pip
 
     - name: Checkout Hermes
       uses: actions/checkout@v4
       with:
         repository: facebook/hermes
-        path: hermes_venv/hermes
+        path: hermes
  
     - name: Build Hermes
       shell: msys2 {0}
       run: |
+        # Remove system Python
+        rm -rf /c/hostedtoolcache/windows/Python
+        
         wget -q https://github.com/zxunge/mingw-package-archives/raw/refs/heads/main/mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
         pacman -U --noconfirm mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
         
-        # Create Python virtualenv
-        virtualenv -p python3 hermes_venv
-        source hermes_venv/bin/activate
-        cd hermes_venv
-        pip install pygments
-        pip install pyyaml
+        ## Create Python virtualenv
+        #virtualenv -p python3 hermes_venv
+        #source hermes_venv/bin/activate
+        #cd hermes_venv
+        #pip install pygments
+        #pip install pyyaml
 
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
 
-        deactivate
+        #deactivate
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: Hermes
-        path: hermes_venv/hermes/build
+        path: build
