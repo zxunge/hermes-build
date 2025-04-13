@@ -15,8 +15,7 @@ jobs:
         msystem: mingw32
         update: true
         install: >-
-          mingw-w64-i686-clang
-          mingw-w64-i686-llvm
+          mingw-w64-i686-toolchain
           mingw-w64-i686-python
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
@@ -41,6 +40,9 @@ jobs:
         wget -q https://repo.msys2.org/mingw/mingw32/mingw-w64-i686-cmake-3.31.6-1-any.pkg.tar.zst
         pacman -U --noconfirm mingw-w64-i686-libbacktrace-r53.1da441c-3-any.pkg.tar.zst
         pacman -U --noconfirm mingw-w64-i686-cmake-3.31.6-1-any.pkg.tar.zst
+
+        # Patch build
+        pushd hermes/ && git apply ../0001-Fix-llvh-build-with-problematic-includes.patch && popd
 
         cmake -S hermes -B build -G Ninja
         cmake --build ./build
