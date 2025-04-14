@@ -16,8 +16,7 @@ jobs:
         update: true
         install: >-
           git
-          mingw-w64-i686-clang
-          mingw-w64-i686-llvm
+          mingw-w64-i686-toolchain
           mingw-w64-i686-python
           mingw-w64-i686-python-pygments
           mingw-w64-i686-python-yaml
