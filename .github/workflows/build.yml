@@ -53,6 +53,7 @@ jobs:
         git apply ../0001-Fix-win32-macro.patch
         git apply ../0001-Fix-atomic.patch
         git apply ../0001-Fix-gcc-math.h.patch
+        git apply ../0001-Fix-rand_s.patch
         cp ../Atomic.cpp external/llvh/lib/Support/
         popd
 
