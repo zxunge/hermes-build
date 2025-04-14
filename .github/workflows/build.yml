@@ -51,6 +51,8 @@ jobs:
         pushd hermes/ 
         git apply ../0001-Fix-llvh-build-with-problematic-includes.patch
         git apply ../0001-Fix-win32-macro.patch
+        git apply ../0001-Fix-atomic.patch
+        cp ../Atomic.cpp external/llvh/lib/Support/
         popd
 
         cmake -S hermes -B build -G Ninja
