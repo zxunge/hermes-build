@@ -10,10 +10,10 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "llvm/Support/Atomic.h"
-#include "llvm/Config/llvm-config.h"
+#include "llvh/Support/Atomic.h"
+#include "llvh/Config/llvm-config.h"
 
-using namespace llvm;
+using namespace llvh;
 
 #if defined(_MSC_VER)
 #include <intrin.h>
