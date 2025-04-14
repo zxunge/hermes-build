@@ -6,7 +6,7 @@ index 25bb949..7b6d085 100644
  
  if(WIN32)
    set(DEFAULT_HERMES_CHECK_NATIVE_STACK OFF)
-+  add_compile_definitions(_WINDOWS LLVM_THREADING_USE_STD_CALL_ONCE)
++  add_compile_definitions(_WINDOWS)
  else()
    set(DEFAULT_HERMES_CHECK_NATIVE_STACK ON)
  endif()
