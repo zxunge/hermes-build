@@ -1,0 +1,26 @@
+From 456a0bbe928fb1277af5af8ec29236fe522fb01f Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Mon, 14 Apr 2025 22:43:44 +0800
+Subject: [PATCH] Fix gcc math.h.
+
+---
+ lib/VM/JSLib/Math.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/lib/VM/JSLib/Math.cpp b/lib/VM/JSLib/Math.cpp
+index 7e7092b..472c43b 100644
+--- a/lib/VM/JSLib/Math.cpp
++++ b/lib/VM/JSLib/Math.cpp
+@@ -20,6 +20,9 @@
+ #ifndef _USE_MATH_DEFINES
+ #define _USE_MATH_DEFINES
+ #endif
++#ifndef _GNU_SOURCE
++#define _GNU_SOURCE
++#endif
+ #include <float.h>
+ #include <math.h>
+ #include <random>
+-- 
+2.49.0
+
