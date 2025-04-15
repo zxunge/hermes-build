@@ -55,6 +55,7 @@ jobs:
         # git apply ../0001-Fix-math.h-usage.patch
         git apply ../0001-Fix-rand_s.patch
         git apply ../0002-Add-_POSIX-macro.patch
+        git apply ../0003-Fix-time.h-includes.patch
         cp ../Atomic.cpp external/llvh/lib/Support/
         popd
 
