@@ -1,19 +1,27 @@
+From 349c95df3b06c6f6cfe42a127a69338b42f6a052 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Tue, 15 Apr 2025 12:46:37 +0800
+Subject: [PATCH] Fix rand_s().
+
+---
+ API/hermes_sandbox/external/wasm-rt-fb.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
 diff --git a/API/hermes_sandbox/external/wasm-rt-fb.h b/API/hermes_sandbox/external/wasm-rt-fb.h
-index e7aaf52..5eebcb8 100644
+index e7aaf52..2d79ea3 100644
 --- a/API/hermes_sandbox/external/wasm-rt-fb.h
 +++ b/API/hermes_sandbox/external/wasm-rt-fb.h
-@@ -26,6 +26,11 @@ typedef atomic_uint seed_t;
- #include <unistd.h>
- #endif
+@@ -8,6 +8,10 @@
+ #ifndef WASM_RT_FB_H
+ #define WASM_RT_FB_H
  
 +#ifndef _CRT_RAND_S
 +#define _CRT_RAND_S
 +#endif
-+#include <stdlib.h>
 +
- #if (defined(__linux__) || defined(__ANDROID__)) && defined(__aarch64__)
- /* On Linux on ARM64 we most likely have at least 39 bits of virtual address
-  * space https://github.com/torvalds/linux/blob/v6.7/arch/arm64/Kconfig#L1262 If
+ #include "wasm-rt-impl.h"
+ 
+ #if __STDC_VERSION__ < 201112L || __STDC_NO_ATOMICS__ == 1
 -- 
 2.49.0
 
