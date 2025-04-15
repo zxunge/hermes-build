@@ -1,0 +1,27 @@
+From 4bcd36e1d24af6e2399fc0d8e35820183ae3c7f0 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Tue, 15 Apr 2025 22:40:03 +0800
+Subject: [PATCH 2/2] Add _POSIX macro.
+
+---
+ API/hermes_sandbox/external/wasm-rt-fb.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/API/hermes_sandbox/external/wasm-rt-fb.h b/API/hermes_sandbox/external/wasm-rt-fb.h
+index f15a673..94741a7 100644
+--- a/API/hermes_sandbox/external/wasm-rt-fb.h
++++ b/API/hermes_sandbox/external/wasm-rt-fb.h
+@@ -8,6 +8,10 @@
+ #ifndef WASM_RT_FB_H
+ #define WASM_RT_FB_H
+ 
++#ifndef _POSIX_THREAD_SAFE_FUNCTIONS
++#define _POSIX_THREAD_SAFE_FUNCTIONS
++#endif
++
+ #include "wasm-rt-impl.h"
+ 
+ #if __STDC_VERSION__ < 201112L || __STDC_NO_ATOMICS__ == 1
+-- 
+2.49.0
+
