@@ -1,12 +1,3 @@
-From fcf34b8ee881d56ce4400c3a48d8e9a3bff45040 Mon Sep 17 00:00:00 2001
-From: zxunge <3396563372@qq.com>
-Date: Mon, 14 Apr 2025 23:40:57 +0800
-Subject: [PATCH] Fix rand_s().
-
----
- API/hermes_sandbox/external/wasm-rt-fb.h | 5 +++++
- 1 file changed, 5 insertions(+)
-
 diff --git a/API/hermes_sandbox/external/wasm-rt-fb.h b/API/hermes_sandbox/external/wasm-rt-fb.h
 index e7aaf52..5eebcb8 100644
 --- a/API/hermes_sandbox/external/wasm-rt-fb.h

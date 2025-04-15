@@ -1,0 +1,15 @@
+diff --git a/lib/VM/JSLib/Math.cpp b/lib/VM/JSLib/Math.cpp
+index 7e7092b..96c3213 100644
+--- a/lib/VM/JSLib/Math.cpp
++++ b/lib/VM/JSLib/Math.cpp
+@@ -20,6 +20,7 @@
+ #ifndef _USE_MATH_DEFINES
+ #define _USE_MATH_DEFINES
+ #endif
++#define _XOPEN_SOURCE 500
+ #include <float.h>
+ #include <math.h>
+ #include <random>
+-- 
+2.49.0
+
