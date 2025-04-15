@@ -1,0 +1,61 @@
+From bfb03359b7a93f8c67eaa6eb618eceb4fb870018 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Tue, 15 Apr 2025 23:16:59 +0800
+Subject: [PATCH 4/4] Revert to rand_s().
+
+---
+ API/hermes_sandbox/external/wasm-rt-fb.h | 31 +++++++++++++++---------
+ 1 file changed, 20 insertions(+), 11 deletions(-)
+
+diff --git a/API/hermes_sandbox/external/wasm-rt-fb.h b/API/hermes_sandbox/external/wasm-rt-fb.h
+index e774929..add3afa 100644
+--- a/API/hermes_sandbox/external/wasm-rt-fb.h
++++ b/API/hermes_sandbox/external/wasm-rt-fb.h
+@@ -12,6 +12,15 @@
+ #define _POSIX_THREAD_SAFE_FUNCTIONS
+ #endif
+ 
++#if defined(__GNUC__) && defined(_WIN32)
++#define _CRT_RAND_S
++#include <stdlib.h>
++#include <windows.h>
++#include <ntsecapi.h>
++#include <errno.h>
++#include <msvcrt.h>
++#endif
++
+ #include "wasm-rt-impl.h"
+ 
+ #if __STDC_VERSION__ < 201112L || __STDC_NO_ATOMICS__ == 1
+@@ -82,17 +91,17 @@ uint32_t rand_u32() {
+       syscall(__NR_getrandom, &val, sizeof(val), GRND_NONBLOCK) != sizeof(val);
+ #elif defined(__linux__) || defined(__ANDROID__)
+   ret = getrandom(&val, sizeof(val), GRND_NONBLOCK) != sizeof(val);
+-#elif defined(_WIN32) && defined(__GNUC__)
+-  /* Fallback to rand_r() (thread-safe variant of rand) which is not
+-   * cryptographically secure but should be fine for this purpose.
+-   */
+-  static seed_t seed = 0;
+-  if (seed == 0) {
+-    seed = time(NULL) ^ clock();
+-  }
+-  val =
+-      ((((uint32_t)rand_r(&seed) & 0xFFFF) << 16) |
+-       ((uint32_t)rand_r(&seed) & 0xFFFF));
++//#elif defined(_WIN32) && defined(__GNUC__)
++//  /* Fallback to rand_r() (thread-safe variant of rand) which is not
++//   * cryptographically secure but should be fine for this purpose.
++//   */
++//  static seed_t seed = 0;
++//  if (seed == 0) {
++//    seed = time(NULL) ^ clock();
++//  }
++//  val =
++//      ((((uint32_t)rand_r(&seed) & 0xFFFF) << 16) |
++//       ((uint32_t)rand_r(&seed) & 0xFFFF));
+ #elif defined(_WIN32)
+   {
+     uint32_t val1, val2;
+-- 
+2.49.0
+
