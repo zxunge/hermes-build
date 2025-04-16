@@ -1,0 +1,27 @@
+From 2eddf6bb2444b2c183b91b03b3d36e5aa0ef9754 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Wed, 16 Apr 2025 13:04:03 +0800
+Subject: [PATCH 6/6] Add link lib.
+
+---
+ CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 25bb949..c6a5625 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -687,6 +687,10 @@ set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
++if(WIN32)
++  target_link_libraries(Hermes PRIVATE msvcr120)
++endif()
++
+ add_subdirectory(external/llvh)
+ add_subdirectory(utils/hermes-lit)
+ add_subdirectory(lib)
+-- 
+2.49.0
+

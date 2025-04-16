@@ -58,6 +58,7 @@ jobs:
         git apply ../0003-Fix-time.h-includes.patch
         git apply ../0004-Revert-to-rand_s.patch
         git apply ../0005-Copy-codes-from-secapi.patch
+        git apply ../0006-Add-link-lib.patch
         cp ../Atomic.cpp external/llvh/lib/Support/
         popd
 
