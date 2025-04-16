@@ -1,0 +1,70 @@
+From 489a755d2e208f0528d43f8bbfe192d839130449 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Wed, 16 Apr 2025 11:55:40 +0800
+Subject: [PATCH 5/5] Copy codes from secapi.
+
+---
+ API/hermes_sandbox/external/wasm-rt-fb.h | 47 ++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+
+diff --git a/API/hermes_sandbox/external/wasm-rt-fb.h b/API/hermes_sandbox/external/wasm-rt-fb.h
+index 124cee3..54c1300 100644
+--- a/API/hermes_sandbox/external/wasm-rt-fb.h
++++ b/API/hermes_sandbox/external/wasm-rt-fb.h
+@@ -18,6 +18,53 @@
+ #include <windows.h>
+ #include <ntsecapi.h>
+ #include <errno.h>
++
++// msvcrt.h 
++//#ifndef __LIBMSVCRT_OS__
++//#error "This file should only be used in libmsvcrt-os.a"
++//#endif
++
++#ifndef MSVCRT_H
++#define MSVCRT_H
++
++#include <winbase.h>
++
++static inline HMODULE __mingw_get_msvcrt_handle(void)
++{
++    return GetModuleHandleA("msvcrt.dll");
++}
++
++#endif
++
++static BOOLEAN (WINAPI *pRtlGenRandom)(void*,ULONG);
++
++static errno_t mingw_rand_s(unsigned int *pval)
++{
++    return !pval || !pRtlGenRandom || !pRtlGenRandom(pval, sizeof(*pval)) ? EINVAL : 0;
++}
++
++static errno_t __cdecl init_rand_s(unsigned int*);
++
++errno_t (__cdecl *__MINGW_IMP_SYMBOL(rand_s))(unsigned int*) = init_rand_s;
++
++errno_t __cdecl
++rand_s(unsigned int *val)
++{
++    return __MINGW_IMP_SYMBOL(rand_s)(val);
++}
++
++static errno_t __cdecl init_rand_s(unsigned int *val)
++{
++    int (__cdecl *func)(unsigned int*);
++
++    func = (void*)GetProcAddress(__mingw_get_msvcrt_handle(), "rand_s");
++    if(!func) {
++        func = mingw_rand_s;
++        pRtlGenRandom = (void*)GetProcAddress(LoadLibraryW(L"advapi32.dll"), "SystemFunction036");
++    }
++
++    return (__MINGW_IMP_SYMBOL(rand_s) = func)(val);
++}
+ #endif
+ 
+ #include "wasm-rt-impl.h"
+-- 
+2.49.0
+
