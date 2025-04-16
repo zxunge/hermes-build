@@ -1,0 +1,25 @@
+From 5e928acc0b2361b1bc9e68ec235523def55694d8 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Wed, 16 Apr 2025 22:38:21 +0800
+Subject: [PATCH 6/6] Add msvcrt.
+
+---
+ lib/VM/CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/lib/VM/CMakeLists.txt b/lib/VM/CMakeLists.txt
+index d6862a4..39685be 100644
+--- a/lib/VM/CMakeLists.txt
++++ b/lib/VM/CMakeLists.txt
+@@ -199,4 +199,8 @@ add_hermes_library(hermesVMRuntimeLean STATIC ${source_files}
+ )
+ target_compile_definitions(hermesVMRuntimeLean PUBLIC HERMESVM_LEAN)
+ 
++if(WIN32)
++    target_link_libraries(hermesVMRuntime PRIVATE msvcr120)
++endif()
++
+ add_subdirectory(Instrumentation)
+-- 
+2.49.0
+
