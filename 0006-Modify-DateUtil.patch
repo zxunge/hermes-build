@@ -1,0 +1,73 @@
+From fac4331124f89250bed33068c15806805391b962 Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Wed, 16 Apr 2025 23:38:04 +0800
+Subject: [PATCH 6/6] Modify DateUtil.
+
+---
+ lib/VM/JSLib/DateUtil.cpp | 36 ++++++++++++++++++++----------------
+ 1 file changed, 20 insertions(+), 16 deletions(-)
+
+diff --git a/lib/VM/JSLib/DateUtil.cpp b/lib/VM/JSLib/DateUtil.cpp
+index e8c42ee..63b9eb0 100644
+--- a/lib/VM/JSLib/DateUtil.cpp
++++ b/lib/VM/JSLib/DateUtil.cpp
+@@ -5,6 +5,10 @@
+  * LICENSE file in the root directory of this source tree.
+  */
+ 
++#if defined(__GNUC__) && defined(_WIN32)
++#define _POSIX_THREAD_SAFE_FUNCTIONS
++#endif
++
+ #include "hermes/VM/JSLib/DateUtil.h"
+ #include "hermes/VM/JSLib/DateCache.h"
+ 
+@@ -213,21 +217,21 @@ int32_t weekDay(double t) {
+ // ES5.1 15.9.1.7
+ 
+ double localTZA() {
+-#ifdef _WINDOWS
+-
+-  // TODO(T173336959): We should use a thread-safe API, and also be consistent
+-  // with daylightSavingTA().
+-  _tzset();
+-
+-  long gmtoff;
+-  int err = _get_timezone(&gmtoff);
+-  if (err)
+-    return 0;
+-
+-  // The result of _get_timezone is negated
+-  return -gmtoff * MS_PER_SECOND;
+-
+-#else
++//#ifdef _WINDOWS
++//
++//  // TODO(T173336959): We should use a thread-safe API, and also be consistent
++//  // with daylightSavingTA().
++//  _tzset();
++//
++//  long gmtoff;
++//  int err = _get_timezone(&gmtoff);
++//  if (err)
++//    return 0;
++//
++//  // The result of _get_timezone is negated
++//  return -gmtoff * MS_PER_SECOND;
++//
++//#else
+ 
+   // Get the current time in seconds (might have DST adjustment included).
+   std::time_t currentWithDST = std::time(nullptr);
+@@ -246,7 +250,7 @@ double localTZA() {
+   // Use the gmtoff field and subtract an hour if currently in DST.
+   return (gmtoff * MS_PER_SECOND) - (local->tm_isdst ? MS_PER_HOUR : 0);
+ 
+-#endif
++//#endif
+ }
+ 
+ //===----------------------------------------------------------------------===//
+-- 
+2.49.0
+
