@@ -53,14 +53,15 @@ jobs:
         git apply ../0001-Fix-win32-macro.patch
         git apply ../0001-Fix-atomic.patch
         # git apply ../0001-Fix-math.h-usage.patch
-        # git apply ../0001-Fix-rand_s.patch
-        # git apply ../0002-Add-_POSIX-macro.patch
-        # git apply ../0003-Fix-time.h-includes.patch
-        # git apply ../0004-Revert-to-rand_s.patch
+        git apply ../0001-Fix-rand_s.patch
+        git apply ../0002-Add-_POSIX-macro.patch
+        git apply ../0003-Fix-time.h-includes.patch
+        git apply ../0004-Revert-to-rand_s.patch
+        git apply ../0005-Copy-codes-from-secapi.patch
         cp ../Atomic.cpp external/llvh/lib/Support/
         popd
 
-        cmake -S hermes -B build -G Ninja -DHERMES_ENABLE_SANDBOX=OFF
+        cmake -S hermes -B build -G Ninja #-DHERMES_ENABLE_SANDBOX=OFF
         cmake --build ./build
 
     - name: Upload artifact
