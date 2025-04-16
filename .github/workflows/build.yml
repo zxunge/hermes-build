@@ -28,7 +28,7 @@ jobs:
     - name: Checkout local repo
       uses: actions/checkout@v4
       with:
-        repository: zxunge/Hermes
+        repository: zxunge/hermes-build
 
     - name: Checkout Hermes
       uses: actions/checkout@v4
