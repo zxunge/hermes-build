@@ -57,8 +57,9 @@ jobs:
         git apply ../0003-Fix-time.h-includes.patch
         git apply ../0004-Revert-to-rand_s.patch
         git apply ../0005-Copy-codes-from-secapi.patch
-        git apply ../0006-Modify-DateUtil.patch
-        cp ../Atomic.cpp external/llvh/lib/Support/
+        git apply ../0006-Add-link-to-msvcr120.patch
+        cp -f ../Atomic.cpp external/llvh/lib/Support/
+        cp -f ../msvcr120.dll /c/Windows/System32/
         popd
 
         cmake -S hermes -B build -G Ninja

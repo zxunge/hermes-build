@@ -1,0 +1,25 @@
+From 77d50aae5ce6526e5f27ec37696e5a094c8e9aaa Mon Sep 17 00:00:00 2001
+From: zxunge <3396563372@qq.com>
+Date: Thu, 17 Apr 2025 11:53:27 +0800
+Subject: [PATCH 6/6] Add link to msvcr120.
+
+---
+ cmake/modules/Hermes.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/modules/Hermes.cmake b/cmake/modules/Hermes.cmake
+index dcb9849..36c8e76 100644
+--- a/cmake/modules/Hermes.cmake
++++ b/cmake/modules/Hermes.cmake
+@@ -35,7 +35,7 @@ if (MSVC)
+   # value (1 MB) which is not enough for some of our stack overflow tests.
+   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /STACK:10000000")
+ elseif (MINGW) # FIXME: Also cygwin?
+-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--stack,16777216")
++  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--stack,16777216 -lmsvcr120")
+ endif ()
+ 
+ if (WIN32)
+-- 
+2.49.0
+
